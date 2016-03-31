@@ -1,4 +1,4 @@
-<% btn_name = @category ? '更新' : '追加' %>
+<% btn_name = @category.persisted? ? '更新' : '追加' %>
 
 <%= form_for(@category, class: 'form-horizontal', role: 'form') do |f| %>
   <% if @category.errors.any? %>
