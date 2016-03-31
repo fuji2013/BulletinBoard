@@ -22,3 +22,7 @@ category_names = [
 category_names.each do |name|
   Category.create(name: name)
 end
+
+Category.all.each do |category, i|
+  Board.create(category: category, title: "#{category.name}#{i}", owner:  "#{category.name}#{i}")
+end
