@@ -156,4 +156,20 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
+  # written by hf
+  describe 'GET #new' do
+    before { get :new }
+
+    it 'ステータスコード200が返ること' do
+      expect(response.status).to eq(200)
+    end
+
+    it '新規Categoryオブジェクトが渡されること' do
+      expect(assigns(:category)).to be_a_new(Category)
+    end
+
+    it 'newテンプレートをrenderしていること' do
+      expect(response).to render_template :new
+    end
+  end
 end
