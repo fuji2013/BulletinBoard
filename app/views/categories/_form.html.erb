@@ -1,3 +1,5 @@
+<% btn_name = @category ? '更新' : '追加' %>
+
 <%= form_for(@category, class: 'form-horizontal', role: 'form') do |f| %>
   <% if @category.errors.any? %>
     <div class='alert alert-danger'>
@@ -13,6 +15,6 @@
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <%= f.submit '追加', class: 'btn btn-info btn-lg' %>
+  <%= f.submit btn_name, class: 'btn btn-info btn-lg' %>
   <%= link_to 'キャンセル', categories_path, class: 'btn btn-default btn-lg' %>
 <% end %>
