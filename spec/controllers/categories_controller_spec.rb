@@ -217,4 +217,23 @@ RSpec.describe CategoriesController, type: :controller do
       expect(response).to render_template :index
     end
   end
+
+  describe 'GET #edit' do
+    before {
+      editToCategory = Category.all.first
+      get :edit, id: editToCategory
+    }
+
+    it 'ステータスコード200が返ること' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'categoryが既存オブジェクトであること' do
+      expect(assigns(:category)).not_to be_a_new(Category)
+    end
+
+    it 'editテンプレートをrenderしていること' do
+      expect(response).to render_template :edit
+    end
+  end
 end
