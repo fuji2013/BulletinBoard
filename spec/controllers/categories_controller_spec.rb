@@ -19,6 +19,33 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe CategoriesController, type: :controller do
+  before{
+    # Category初期化
+    Category.delete_all
+
+    # Category Fixture追加
+    category_names = [
+                      'アニメ',
+                      'ゲーム',
+                      '海外ドラマ',
+                      'スマホ全般',
+                      '投資',
+                      '国内旅行',
+                      '海外旅行',
+                      '漫画',
+                      '車',
+                      'バイク',
+                      'ロードバイク・ロードレーサー'
+                    ]
+      category_names.each do |name|
+        FactoryGirl.create(:category, {name: name})
+      end
+  }
+
+  after{
+    # Category初期化
+    Category.delete_all
+  }
 
   # This should return the minimal set of attributes required to create a valid
   # Category. As you add validations to Category, be sure to
@@ -170,6 +197,24 @@ RSpec.describe CategoriesController, type: :controller do
 
     it 'newテンプレートをrenderしていること' do
       expect(response).to render_template :new
+    end
+  end
+
+  describe 'GET #index' do
+    before {
+      get :index
+    }
+
+    it 'ステータスコード200が返ること' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'カテゴリーが取得できていること' do
+      expect(assigns(:categories).size).to be > 0
+    end
+
+    it 'indexテンプレートをrenderしていること' do
+      expect(response).to render_template :index
     end
   end
 end

@@ -50,7 +50,12 @@ group :development do
 end
 
 # added by hf
+## ページネーション
 gem 'kaminari', '~> 0.16.2'
 gem 'kaminari-bootstrap', '~> 3.0.1'
+
+## Test
+gem 'factory_girl_rails', '~> 4.6.0'
+
 
 
