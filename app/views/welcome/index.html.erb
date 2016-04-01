@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>掲示板へようこそ</h1>
+</div>
+
+<div class='list-group'>
+  <% @boards.each do |board| %>
+    <%= content_tag :a, href: 'http://www.yahoo.co.jp', class: 'list-group-item' do %>
+      <div class='list-group-item-heading'>
+        <%= board.title %>
+        <%= content_tag :span, '123', class: 'badge' %>
+      </div>
+      <p class='list-group-item-text'>
+        コメント
+      </p>
+    <% end %>
+  <% end %>
+  <%= paginate @boards %>
+</div>

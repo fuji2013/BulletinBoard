@@ -23,6 +23,6 @@ category_names.each do |name|
   Category.create(name: name)
 end
 
-Category.all.each do |category, i|
+Category.all.each_with_index do |category, i|
   Board.create(category: category, title: "#{category.name}#{i}", owner:  "#{category.name}#{i}")
 end
