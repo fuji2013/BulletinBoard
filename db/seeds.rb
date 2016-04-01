@@ -26,3 +26,10 @@ end
 Category.all.each_with_index do |category, i|
   Board.create(category: category, title: "#{category.name}#{i}", owner:  "#{category.name}#{i}")
 end
+
+# Commentレコード作成
+Board.all.each_with_index do |board, i|
+  Comment.create(board: board, text: "#{board.title}のコメント#{i}", commentator: "コメンテーターA")
+
+  Comment.create(board: board, text: "#{board.title}のコメント#{i}", commentator: "コメンテーターB")
+end

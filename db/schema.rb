@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331145718) do
+ActiveRecord::Schema.define(version: 20160401022636) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "category_id"
@@ -30,5 +30,15 @@ ActiveRecord::Schema.define(version: 20160331145718) do
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "board_id"
+    t.string   "text",        null: false
+    t.string   "commentator", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "comments", ["board_id"], name: "index_comments_on_board_id"
 
 end
