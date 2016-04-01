@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
   resources :categories, except: :show
-  resources :boards, only: [:show, :new, :create, :edit, :index]
+  resources :boards, only: [:show, :new, :create, :edit, :index] do
+    resources :comments, only: [:new, :create]
+  end
+
+
+  resources :board,  except: :index do
+    resources :tickets, only: [:new, :create, :destroy]
+  end
+
   # get '/logout' => 'sessions#destroy', as: :logout
 
   # The priority is based upon order of creation: first created -> highest priority.

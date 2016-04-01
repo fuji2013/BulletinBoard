@@ -18,11 +18,46 @@
 
 <div class="board_add_comment">
   <!-- TODO: このスレッドにコメントするのアクション -->
-  <%= link_to "このスレッドにコメントする", "http://www.yahoo.co.jp/", class: "btn btn-danger" %>
+  <button class="btn btn-success btn-block" data-toggle="modal" data-target="#createComment">
+    このスレッドにコメントする
+  </button>
+  <div class="modal fade" id="createComment" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="dialogHeader">
+            コメント
+          </h4>
+          <%= form_for(@board.comments.build, url:board_comments_path(@board), remote: true) do |f| %>
+            <div class="modal-body">
+              <div class="form-group">
+                <%= f.label :text %>
+                <%= f.text_field :text, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :commentator %>
+                <%= f.text_field :commentator, class: "form-control" %>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">
+                キャンセル
+              </button>
+              <%= f.submit "コメントを登録", class: "btn btn-primary", data: { disable_with: "送信中..." } %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <br>
 <div id="move_to_root_btn">
-  <%= link_to "トップページに戻る", root_path, class:"btn btn-default" %>
+  <%= link_to "トップページに戻る", root_path, class:"btn btn-default btn-block" %>
 </div>
 
 <% if @comments %>
