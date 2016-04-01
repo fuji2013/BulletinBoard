@@ -2,6 +2,12 @@
   <h1>掲示板へようこそ</h1>
 </div>
 
+<div id="create_new_board_btn">
+  <%= link_to "新規スレッドを作成する", new_board_path, class: "btn btn-danger btn-lg", id: "create_new_board_btn" %>
+</div>
+<br>
+
+<h3>最近更新されたスレッド</h3>
 <div class='list-group'>
   <% @boards.each do |board| %>
     <%= content_tag :a, href: board_path(board), class: 'list-group-item' do %>
