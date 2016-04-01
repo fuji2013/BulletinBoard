@@ -10,7 +10,6 @@ class BoardsController < ApplicationController
     if comments_all.size > 1
       @comments = comments_all.offset(2).page(params[:page]).per(PER)
     end
-
   end
 
   def new
