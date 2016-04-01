@@ -1,0 +1,28 @@
+<% submit_btn_name = board.persisted? ? "更新" : "追加" %>
+
+<%= form_for(board, class: "form-horizontal", role: "form") do |f| %>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.collection_select :category, categories, :id, :name, {}, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <% if board.new_record? %>
+    <%= fields_for(comment, class: "form-horizontal", role: "form") do |g| %>
+      <div class="form-group">
+        <%= g.label :text %>
+        <%= g.text_area :text, class: "form-control" %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :owner %>
+    <%= f.text_field :owner, class: "form-control" %>
+  </div>
+  <%= f.submit submit_btn_name, class: 'btn btn-info btn-lg' %>
+  <%= link_to "キャンセル", root_path, class: "btn btn-default btn-lg" %>
+<% end %>

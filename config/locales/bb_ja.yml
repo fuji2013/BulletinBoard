@@ -2,6 +2,16 @@ ja:
   activerecord:
     models:
       category: カテゴリー
+      board: 掲示板
     attributes:
       category:
         name: カテゴリー名
+      board:
+        category: カテゴリー
+        title: タイトル
+        owner: 名前
+      comment:
+        board: 掲示板
+        text: 本文
+        commentator: 名前
+        
