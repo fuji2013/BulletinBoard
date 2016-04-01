@@ -4,13 +4,13 @@
 
 <div class='list-group'>
   <% @boards.each do |board| %>
-    <%= content_tag :a, href: 'http://www.yahoo.co.jp', class: 'list-group-item' do %>
+    <%= content_tag :a, href: board_path(board), class: 'list-group-item' do %>
       <div class='list-group-item-heading'>
         <%= board.title %>
-        <%= content_tag :span, '123', class: 'badge' %>
+        <%= content_tag :span, board.comments.size, class: 'badge' %>
       </div>
       <p class='list-group-item-text'>
-        コメント
+        <%= board.comments.first.text %>
       </p>
     <% end %>
   <% end %>
