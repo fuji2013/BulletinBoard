@@ -20,6 +20,10 @@
   <!-- TODO: このスレッドにコメントするのアクション -->
   <%= link_to "このスレッドにコメントする", "http://www.yahoo.co.jp/", class: "btn btn-danger" %>
 </div>
+<br>
+<div id="move_to_root_btn">
+  <%= link_to "トップページに戻る", root_path, class:"btn btn-default" %>
+</div>
 
 <% if @comments %>
   <%= paginate @comments %>
