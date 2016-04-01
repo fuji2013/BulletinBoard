@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1></h1>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading"></div>
+  <div class="panel-body">
+    <h3>
+      <%= link_to @board.title, board_path %>
+    </h3>
+    <p>更新日時：
+      <%= @comments.last.updated_at %>
+    </p>
+    <hr>
+    <%= render partial: "comment", locals: { no: "1", comment: @owner_first_comment } %>
+  </div>
+</div>
+
+<div class="board_add_comment">
+  <!-- TODO: このスレッドにコメントするのアクション -->
+  <%= link_to "このスレッドにコメントする", "http://www.yahoo.co.jp/", class: "btn btn-danger" %>
+</div>
+
+<%= paginate @comments %>
+
+<div class="panel panel-info">
+  <div class="panel-heading"></div>
+  <div class="panel-body">
+    <% @comments.each_with_index do |comment, i| %>
+      <%= render partial: "comment", locals: { no: "#{2 + i}", comment: comment } %>
+      <hr>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate @comments %>

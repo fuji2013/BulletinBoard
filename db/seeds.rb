@@ -28,8 +28,9 @@ Category.all.each_with_index do |category, i|
 end
 
 # Commentレコード作成
+commentator_sign = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "H", "I"]
 Board.all.each_with_index do |board, i|
-  Comment.create(board: board, text: "#{board.title}のコメント#{i}", commentator: "コメンテーターA")
-
-  Comment.create(board: board, text: "#{board.title}のコメント#{i}", commentator: "コメンテーターB")
+  11.times do |j|
+    Comment.create(board: board, text: "#{board.title}のコメント#{j}", commentator: "コメンテーター#{commentator_sign[j]}")
+  end
 end
