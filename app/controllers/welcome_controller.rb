@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
+  PER = 10
+
   def index
-    @boards = Board.all
+    @boards = Board.page(params[:page]).per(PER)
   end
 end
