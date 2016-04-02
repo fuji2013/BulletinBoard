@@ -5,11 +5,12 @@ class BoardsController < ApplicationController
   def show
     comments_all = Comment.where(board: params[:id]).order(:updated_at)
 
-    @owner_first_comment = comments_all.limit(1).first
-    @comments = nil
-    if comments_all.size > 1
-      @comments = comments_all.offset(2).page(params[:page]).per(PER)
-    end
+    @owner_first_comment = Comment.where(board: params[:id]).order(:updated_at).first
+
+    @comments = Comment
+                  .where(board: params[:id]).order(:updated_at)
+                  .where.not(id: @owner_first_comment.id)
+                  .page(params[:page]).per(PER)
   end
 
   def new
