@@ -16,7 +16,7 @@
         <%= content_tag :span, board.comments.size, class: 'badge' %>
       </div>
       <p class='list-group-item-text'>
-        <%= board.comments.first.text %>
+        <%= board.comments.last.text %>
       </p>
     <% end %>
   <% end %>
