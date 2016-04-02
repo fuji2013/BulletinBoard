@@ -66,7 +66,7 @@
     <div class="panel-heading"></div>
     <div class="panel-body">
       <% @comments.each_with_index do |comment, i| %>
-        <%= render partial: "comment", locals: { no: "#{2 + i}", comment: comment } %>
+        <%= render partial: "comment", locals: { no: "#{(@comments.current_page - 1) * 10 + i + 2}", comment: comment } %>
         <hr>
       <% end %>
     </div>
