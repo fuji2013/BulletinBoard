@@ -1,0 +1,12 @@
+<div class="comment">
+  <%= content_tag :p do %>
+    <div class="no">
+      <%= no %>
+    </div>
+    <div class="date">
+      <%= format_datetime(comment.updated_at, :datetime) %>
+    </div>
+    <%= content_tag :p, class: "commentator" do comment.commentator end %>
+  <% end %>
+  <%= content_tag :p, class: "text" do comment.text end %>
+</div>

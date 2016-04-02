@@ -1,0 +1,75 @@
+<div class="page-header">
+  <h1></h1>
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading"></div>
+  <div class="panel-body">
+    <h3>
+      <%= link_to @board.title, board_path %>
+    </h3>
+    <p>更新日時：
+      <%= format_datetime(@board.updated_at,:datetime) %>
+    </p>
+    <hr>
+    <%= render partial: "comment", locals: { no: "1", comment: @owner_first_comment } %>
+  </div>
+</div>
+
+<div class="board_add_comment">
+  <!-- TODO: このスレッドにコメントするのアクション -->
+  <button class="btn btn-success btn-block" data-toggle="modal" data-target="#createComment">
+    このスレッドにコメントする
+  </button>
+  <div class="modal fade" id="createComment" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            &times;
+          </button>
+          <h4 class="modal-title" id="dialogHeader">
+            コメント
+          </h4>
+        </div>
+        <%= form_for(@board.comments.build, url:board_comments_path(@board), remote: true) do |f| %>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.label :text %>
+              <%= f.text_area :text, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :commentator %>
+              <%= f.text_field :commentator, class: "form-control" %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              キャンセル
+            </button>
+            <%= f.submit "コメントを登録", class: "btn btn-primary", data: { disable_with: "送信中..." } %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div id="move_to_root_btn">
+  <%= link_to "トップページに戻る", root_path, class:"btn btn-default btn-block" %>
+</div>
+<br>
+<% if @comments %>
+  <%= paginate @comments %>
+  <div class="panel panel-info">
+    <div class="panel-heading"></div>
+    <div class="panel-body">
+      <% @comments.each_with_index do |comment, i| %>
+        <%= render partial: "comment", locals: { no: "#{(@comments.current_page - 1) * 10 + i + 2}", comment: comment } %>
+        <hr>
+      <% end %>
+    </div>
+  </div>
+  <%= paginate @comments %>
+<% end %>

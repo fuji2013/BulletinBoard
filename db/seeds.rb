@@ -26,3 +26,11 @@ end
 Category.all.each_with_index do |category, i|
   Board.create(category: category, title: "#{category.name}#{i}", owner:  "#{category.name}#{i}")
 end
+
+# Commentレコード作成
+commentator_sign = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "H", "I"]
+Board.all.each_with_index do |board, i|
+  11.times do |j|
+    Comment.create(board: board, text: "#{board.title}のコメント#{j}", commentator: "コメンテーター#{commentator_sign[j]}")
+  end
+end
