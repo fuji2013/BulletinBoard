@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   root to: "welcome#index"
   resources :categories, except: :show
-  resources :boards, only: [:show, :new, :create, :edit, :index] do
+  resources :boards, except: [:destroy] do
     resources :comments, only: [:new, :create]
   end
-
 
   resources :board,  except: :index do
     resources :tickets, only: [:new, :create, :destroy]

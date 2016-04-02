@@ -9,7 +9,7 @@
       <%= link_to @board.title, board_path %>
     </h3>
     <p>更新日時：
-      <%= @board.last_updated_at %>
+      <%= @board.updated_at %>
     </p>
     <hr>
     <%= render partial: "comment", locals: { no: "1", comment: @owner_first_comment } %>

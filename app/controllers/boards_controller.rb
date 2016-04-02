@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   PER = 10
-  before_action :set_board, only: [:show]
+  before_action :set_board, only: [:show, :update]
 
   def show
     comments_all = Comment.where(board: params[:id]).order(:updated_at)
@@ -15,16 +15,32 @@ class BoardsController < ApplicationController
   def new
     @categories = Category.all
     @board = Board.new
-    @comment = Comment.new
+    @board.comments.build
   end
 
   def create
     @board = Board.new(board_params)
-    @comment = Comment.new(board: @board, text: comment_params[:text], commentator: board_params[:owner] )
-    @board.comments = [@comment]
+    @board.comments.each do |comment|
+      comment.commentator = board_params[:owner]
+    end
 
-    if @board.save
-      redirect_to root_path
+    respond_to do |format|
+      if @board.save
+        format.html { redirect_to root_path, notice: 'Category was successfully created.' }
+        format.json { render :show, status: :created, location: @board }
+      else
+        format.html { render :new }
+        format.json { render json: @board.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    if @board.update(board_params)
+      flash[:notice] = "コメントを登録しました"
+      head 201
+    else
+      render json:{messages: board.errors.full_messages}, status: 422
     end
   end
 
@@ -34,10 +50,11 @@ class BoardsController < ApplicationController
   end
 
   def board_params
-    params.require(:board).permit(:category_id, :title, :owner)
-  end
-
-  def comment_params
-    params.require(:comment).permit(:text)
+    params.require(:board).permit(:category_id, :title, :owner,
+                                   comments_attributes: [
+                                    :id,
+                                    :text,
+                                    :commentator
+                                    ])
   end
 end
