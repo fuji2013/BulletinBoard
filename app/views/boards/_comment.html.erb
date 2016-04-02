@@ -4,7 +4,7 @@
       <%= no %>
     </div>
     <div class="date">
-      <%= comment.updated_at %>
+      <%= format_datetime(comment.updated_at, :datetime) %>
     </div>
     <%= content_tag :p, class: "commentator" do comment.commentator end %>
   <% end %>
